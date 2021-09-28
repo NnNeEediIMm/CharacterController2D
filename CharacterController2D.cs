@@ -33,7 +33,7 @@ public class CharacterController2D : MonoBehaviour
     {
         velocityMain();
     }
-    public void Move(Vector3 direction)
+    public void Move(Vector2 direction)
     {
         transform.position = transform.position + direction * Time.deltaTime;
     }
