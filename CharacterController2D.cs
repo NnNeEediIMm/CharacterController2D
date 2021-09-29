@@ -1,6 +1,11 @@
+/*Some Character Controller by NnNeEediIMm*/
+/*Because unity doesnt have one!*/
+
 using System;
 using System.Threading;
 using UnityEngine;
+//using NnNeEediIMmWork;
+
 
 public class CharacterController2D : MonoBehaviour
 {
@@ -11,6 +16,7 @@ public class CharacterController2D : MonoBehaviour
     public float MinMoveDistance = 0.001f;
     public Vector3 Center = new Vector3(0f, 0f, 0f);
     private readonly bool isMoving = true;
+    public float radius = 0.9f;
     public float Height = 1f;
     public static float StepLoad = 1f;
     //end of all vaiables
@@ -35,12 +41,13 @@ public class CharacterController2D : MonoBehaviour
     }
     public void Move(Vector2 direction)
     {
-        transform.position = transform.position + direction * Time.deltaTime;
+        Vector3 newDirection = new Vector3(direction.x, direction.y, 0f);
+        transform.position = transform.position + newDirection;
     }
 
-    public void isGroundedSystem(LayerMask ground)
+    public void grounded(LayerMask ground)
     {
-        isGrounded = Physics2D.Raycast(transform.position, transform.TransformDirection(Vector2.down), 0.5f, ground);
+        isGrounded = Physics2D.Raycast(transform.position, transform.TransformDirection(Vector2.down), radius, ground);
     }
 
     private void velocityMain()
@@ -54,7 +61,7 @@ public class CharacterController2D : MonoBehaviour
     /// This is main for entire script
     /// for slope, for center and other stuff !!
     /// </summary>
-    public void allMovementFull()
+    void allMovementFull()
     {
         if (!isMoving)
         {
